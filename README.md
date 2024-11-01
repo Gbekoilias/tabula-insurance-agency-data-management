@@ -1,6 +1,6 @@
 # Tabula Insurance Agency Data Management
 
-![Tabula Insurance Agency](https://via.placeholder.com/800x200?text=Tabula+Insurance+Agency+Logo) <!-- Replace with actual image URL -->
+![Tabula Insurance Agency](https://wp-insuredmine-public-bucket.s3.us-west-2.amazonaws.com/media/2021/07/05155919/chart-hand-pen-590014-scaled.jpeg) <!-- Replace with actual image URL -->
 
 ## Project Overview
 This project involves managing personnel data and summarizing cash flow for Tabula Insurance Agency using Excel. It includes detailed steps to manipulate worksheets for optimal data management.
