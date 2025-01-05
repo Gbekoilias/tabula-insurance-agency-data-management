@@ -1,0 +1,69 @@
+(* Define a function to perform symbolic differentiation *)
+ClearAll[symbolicDifferentiation]
+symbolicDifferentiation[function_, variable_] := Module[
+  {derivative},
+  
+  (* Use D to compute the derivative *)
+  derivative = D[function, variable];
+  
+  (* Return the derivative *)
+  If[derivative === 0, 
+    "The derivative is zero.", 
+    derivative
+  ]
+]
+
+(* Define a function to perform symbolic integration *)
+ClearAll[symbolicIntegration]
+symbolicIntegration[function_, variable_] := Module[
+  {integral},
+  
+  (* Use Integrate to compute the integral *)
+  integral = Integrate[function, variable];
+  
+  (* Return the integral *)
+  If[integral === 0, 
+    "The integral is zero.", 
+    integral
+  ]
+]
+
+(* Example usage of the differentiation function *)
+Print["Performing symbolic differentiation: f(x) = x^2 + 3x + 5"]
+derivativeExample = symbolicDifferentiation[x^2 + 3 x + 5, x]
+Print["Derivative: ", derivativeExample]
+
+(* Example usage of the integration function *)
+Print["Performing symbolic integration: f(x) = x^2 + 3x + 5"]
+integralExample = symbolicIntegration[x^2 + 3 x + 5, x]
+Print["Integral: ", integralExample]
+
+(* Define a function to handle user input for differentiation and integration interactively *)
+ClearAll[interactiveSymbolicAnalysis]
+interactiveSymbolicAnalysis[] := Module[
+  {operationType, function, variable, result},
+  
+  (* Ask user for the type of operation *)
+  operationType = InputString["Enter 'differentiate' for differentiation or 'integrate' for integration: "];
+  
+  (* Get function and variable from user *)
+  function = ToExpression[InputString["Enter the function (e.g., x^2 + 3x + 5): "]];
+  variable = ToExpression[InputString["Enter the variable (e.g., x): "]];
+  
+  If[operationType == "differentiate",
+    (* Perform differentiation and display result *)
+    result = symbolicDifferentiation[function, variable];
+    Print["Derivative: ", result],
+    
+    If[operationType == "integrate",
+      (* Perform integration and display result *)
+      result = symbolicIntegration[function, variable];
+      Print["Integral: ", result],
+      
+      Print["Invalid input. Please enter 'differentiate' or 'integrate'."]
+    ]
+  ]
+]
+
+(* Run interactive symbolic analysis *)
+interactiveSymbolicAnalysis[]

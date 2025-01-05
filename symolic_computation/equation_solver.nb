@@ -1,0 +1,74 @@
+(* Define a function to solve algebraic equations *)
+ClearAll[solveAlgebraicEquations]
+solveAlgebraicEquations[equation_, variable_] := Module[
+  {solution},
+  
+  (* Use Solve to find the solution *)
+  solution = Solve[equation == 0, variable];
+  
+  (* Return the solution *)
+  If[solution === {}, 
+    "No solution found", 
+    solution
+  ]
+]
+
+(* Define a function to solve differential equations *)
+ClearAll[solveDifferentialEquations]
+solveDifferentialEquations[equation_, variable_, function_] := Module[
+  {solution},
+  
+  (* Use DSolve to find the solution *)
+  solution = DSolve[equation == 0, function, variable];
+  
+  (* Return the solution *)
+  If[solution === {}, 
+    "No solution found", 
+    solution
+  ]
+]
+
+(* Example usage of the algebraic solver *)
+Print["Solving algebraic equation: x^2 - 4 == 0"]
+algebraicSolution = solveAlgebraicEquations[x^2 - 4, x]
+Print["Algebraic Solution: ", algebraicSolution]
+
+(* Example usage of the differential equation solver *)
+Print["Solving differential equation: y''[x] + y[x] == 0"]
+differentialSolution = solveDifferentialEquations[y''[x] + y[x], x, y]
+Print["Differential Equation Solution: ", differentialSolution]
+
+(* Define a function to handle user input and solve equations interactively *)
+ClearAll[interactiveEquationSolver]
+interactiveEquationSolver[] := Module[
+  {equationType, equation, variable, function, result},
+  
+  (* Ask user for the type of equation *)
+  equationType = InputString["Enter 'algebraic' for algebraic equations or 'differential' for differential equations: "];
+  
+  If[equationType == "algebraic",
+    (* Get algebraic equation and variable from user *)
+    equation = ToExpression[InputString["Enter the algebraic equation (e.g., x^2 - 4): "]];
+    variable = ToExpression[InputString["Enter the variable (e.g., x): "]];
+    
+    (* Solve and display result *)
+    result = solveAlgebraicEquations[equation, variable];
+    Print["Algebraic Solution: ", result],
+    
+    If[equationType == "differential",
+      (* Get differential equation and function from user *)
+      equation = ToExpression[InputString["Enter the differential equation (e.g., y''[x] + y[x]): "]];
+      variable = ToExpression[InputString["Enter the variable (e.g., x): "]];
+      function = ToExpression[InputString["Enter the function (e.g., y): "]];
+      
+      (* Solve and display result *)
+      result = solveDifferentialEquations[equation, variable, function];
+      Print["Differential Equation Solution: ", result],
+      
+      Print["Invalid input. Please enter 'algebraic' or 'differential'."]
+    ]
+  ]
+]
+
+(* Run interactive solver *)
+interactiveEquationSolver[]

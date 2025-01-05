@@ -1,0 +1,28 @@
+(* Define a function to create an interactive plot *)
+ClearAll[symbolicVisualization]
+symbolicVisualization[function_, variable_, range_, params_List] := Module[
+  {plot_output},
+  
+  (* Use Manipulate to create an interactive plot *)
+  plot_output = Manipulate[
+    Plot[function, {variable, range[[1]], range[[2]]}, 
+      PlotLabel -> "Plot of " <> ToString[function], 
+      AxesLabel -> {ToString[variable], "f(" <> ToString[variable] <> ")"},
+      PlotRange -> All],
+    params
+  ];
+  
+  (* Return the plot output *)
+  plot_output
+]
+
+(* Example usage of the symbolic visualization function *)
+Print["Generating interactive plot for f(x) = a Sin[b x + c]"]
+interactivePlot = symbolicVisualization[a Sin[b x + c], x, {0, 2 Pi}, {
+  {a, 1, "Amplitude"},
+  {b, 1, "Frequency"},
+  {c, 0, "Phase Shift"}
+}];
+
+(* Display the interactive plot *)
+interactivePlot
